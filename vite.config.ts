@@ -20,7 +20,7 @@ async function loadInspectPlugin(): Promise<PluginOption[]> {
 
 // https://vite.dev/config/
 export default defineConfig(async ({ command }) => ({
-  base: './',
+  base: '/',
   plugins: [...(command === 'serve' ? await loadInspectPlugin() : []), react()],
   server: {
     port: 3000,
