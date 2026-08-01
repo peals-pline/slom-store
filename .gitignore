@@ -1,0 +1,22 @@
+# Зависимости и сборка
+node_modules/
+dist/
+dist-ssr/
+
+# Логи
+*.log
+
+# Окружение
+.env
+.env.local
+*.local
+
+# Деплой
+.vercel/
+
+# Системное и редакторы
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
