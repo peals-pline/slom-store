@@ -9,7 +9,7 @@ interface HeaderProps {
 export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProps) {
   return (
     <>
-      {/* Анонс-полоса */}
+      {/* Анонс-полоса — уезжает при прокрутке, шапка не закрывает эту высоту */}
       <div className="bg-slom-bone border-b border-slom-ink/15 relative z-[60]">
         <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-8 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-slom-ink">
           <span className="hidden sm:block">Доставка по всему миру</span>
@@ -18,8 +18,11 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
         </div>
       </div>
 
-      {/* Шапка поверх героя */}
-      <header className="absolute top-8 left-0 right-0 z-50 text-white">
+      {/* Закреплённая шапка: sticky, встаёт вплотную к верху окна при прокрутке */}
+      {/* Фон сплошной, а не полупрозрачный: на первом экране шапка стоит
+          вплотную к чёрному герою, и любая просветка выдаёт себя серой
+          полосой поперёк макета. */}
+      <header className="sticky top-0 z-40 text-white bg-slom-ink">
         <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-white/20">
           <div className="flex items-center gap-8">
             <button
@@ -44,11 +47,8 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
             ))}
           </nav>
 
-          <div className="flex items-center gap-6 font-mono text-[11px] tracking-[0.3em]">
-            <span className="hidden md:inline underline underline-offset-4 hover:text-slom-red transition-colors">
-              ПОИСК
-            </span>
-            <button onClick={onCartOpen} className="hover:text-slom-red transition-colors">
+          <div className="flex items-center gap-6 font-mono text-[11px] tracking-[0.3em] pr-3 md:pr-4">
+            <button onClick={onCartOpen} className="hover:opacity-70 transition-opacity">
               КОРЗИНА ({cartCount})
             </button>
           </div>
