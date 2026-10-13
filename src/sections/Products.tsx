@@ -7,7 +7,7 @@ interface ProductsProps {
 export default function Products({ onAdd }: ProductsProps) {
   return (
     <section id="shop" className="bg-slom-bone border-b border-slom-ink relative">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12">
         {/* Заголовок */}
         <div className="lg:col-span-3 px-4 md:px-8 py-12 lg:py-16 flex flex-col justify-between gap-10">
           <h2 className="font-display font-bold uppercase leading-[0.96] text-7xl lg:text-[4.2vw]">
@@ -16,7 +16,7 @@ export default function Products({ onAdd }: ProductsProps) {
             <span className="block display-condensed">вещи</span>
           </h2>
           <div className="space-y-5">
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase leading-relaxed text-slom-ink/70">
+            <p className="font-mono text-[0.6875rem] tracking-[0.2em] uppercase leading-relaxed text-slom-ink/70">
               Отобранные вещи.
               <br />
               Ограниченный тираж.
@@ -49,7 +49,7 @@ export default function Products({ onAdd }: ProductsProps) {
                   loading="lazy"
                 />
                 {p.tag && (
-                  <span className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-slom-red text-white font-mono text-[9px] tracking-[0.2em] sm:tracking-[0.25em] px-2 py-1 z-10">
+                  <span className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-slom-red text-white font-mono text-[0.5625rem] tracking-[0.2em] sm:tracking-[0.25em] px-2 py-1 z-10">
                     {p.tag}
                   </span>
                 )}
@@ -67,13 +67,13 @@ export default function Products({ onAdd }: ProductsProps) {
               <div className="flex-1 flex flex-col gap-1 px-3 sm:px-4 py-3 sm:py-4 border-t border-slom-ink/15">
                 <div>
                   <h3 className="font-display font-semibold uppercase text-sm sm:text-base leading-tight">{p.name}</h3>
-                  <p className="font-mono text-[9px] tracking-[0.25em] text-slom-smoke mt-1">{p.nameEn}</p>
+                  <p className="font-mono text-[0.5625rem] tracking-[0.25em] text-slom-smoke mt-1">{p.nameEn}</p>
                 </div>
                 <p className="font-mono text-sm whitespace-nowrap mt-auto pt-2">{formatPrice(p.price)}</p>
               </div>
               <button
                 onClick={() => onAdd(p.id)}
-                className="w-full py-3 font-mono text-[10px] tracking-[0.3em] uppercase border-t border-slom-ink/15 hover:bg-slom-red hover:text-white transition-colors"
+                className="w-full py-3 font-mono text-[0.625rem] tracking-[0.3em] uppercase border-t border-slom-ink/15 hover:bg-slom-red hover:text-white transition-colors"
               >
                 В корзину →
               </button>
@@ -83,7 +83,7 @@ export default function Products({ onAdd }: ProductsProps) {
 
         {/* Вертикальная красная рейка */}
         <div className="hidden lg:flex lg:col-span-1 bg-slom-red items-center justify-center border-l border-slom-ink">
-          <span className="text-vertical font-mono text-[11px] tracking-[0.5em] uppercase text-white">
+          <span className="text-vertical font-mono text-[0.6875rem] tracking-[0.5em] uppercase text-white">
             Лимитированная серия // Дроп 02
           </span>
         </div>

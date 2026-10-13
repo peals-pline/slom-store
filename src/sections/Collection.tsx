@@ -9,7 +9,7 @@ const SHOTS = [
 export default function Collection() {
   return (
     <section id="drop" className="bg-white border-b border-slom-ink">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12">
         {/* Заголовок секции */}
         <div className="lg:col-span-3 px-4 md:px-8 py-12 lg:py-16 flex flex-col justify-between gap-10 border-b lg:border-b-0 lg:border-r border-slom-ink/15">
           {/* Номер дропа стоит рядом с заголовком, а не поверх него:
@@ -24,7 +24,7 @@ export default function Collection() {
             </span>
           </div>
           <div className="space-y-5">
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase leading-relaxed text-slom-ink/70">
+            <p className="font-mono text-[0.6875rem] tracking-[0.2em] uppercase leading-relaxed text-slom-ink/70">
               Капсула «Лето ’26»
               <br />
               Лёгкие слои. Тяжёлые заявления.
@@ -48,10 +48,10 @@ export default function Collection() {
                 alt={s.alt}
                 width={1024}
                 height={1452}
-                className="w-full h-[420px] lg:h-[520px] object-cover object-top grayscale-[25%] contrast-125"
+                className="w-full h-[26.25rem] lg:h-[32.5rem] object-cover object-top grayscale-[25%] contrast-125"
                 loading="lazy"
               />
-              <figcaption className="absolute top-3 left-3 bg-slom-ink text-white font-mono text-[9px] tracking-[0.3em] px-2 py-1">
+              <figcaption className="absolute top-3 left-3 bg-slom-ink text-white font-mono text-[0.5625rem] tracking-[0.3em] px-2 py-1">
                 {s.num}
               </figcaption>
             </figure>

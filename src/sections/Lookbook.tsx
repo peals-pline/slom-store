@@ -39,7 +39,7 @@ export default function Lookbook() {
 
   return (
     <section id="lookbook" className="bg-slom-ink text-white border-b border-slom-ink relative">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12">
         {/* Заголовок */}
         <div className="lg:col-span-3 px-4 md:px-8 py-12 lg:py-16 flex flex-col justify-between gap-10 border-b lg:border-b-0 lg:border-r border-white/15 relative">
           <div className="flex items-start gap-4">
@@ -50,7 +50,7 @@ export default function Lookbook() {
             <span className="bg-slom-red text-white font-display font-semibold text-lg px-2 py-1 mt-2">SS26</span>
           </div>
           <div className="space-y-5">
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase leading-relaxed text-white/60">
+            <p className="font-mono text-[0.6875rem] tracking-[0.2em] uppercase leading-relaxed text-white/60">
               Настоящие люди. Настоящие улицы.
               <br />
               Это — СЛОМ.
@@ -71,10 +71,10 @@ export default function Lookbook() {
                   alt={l.alt}
                   width={1024}
                   height={1452}
-                  className="w-full h-[420px] lg:h-[520px] object-cover object-top grayscale-[30%] contrast-125"
+                  className="w-full h-[26.25rem] lg:h-[32.5rem] object-cover object-top grayscale-[30%] contrast-125"
                   loading="lazy"
                 />
-                <figcaption className="absolute top-3 left-3 bg-slom-ink/70 font-mono text-[9px] tracking-[0.3em] text-white/80 px-2 py-1">
+                <figcaption className="absolute top-3 left-3 bg-slom-ink/70 font-mono text-[0.5625rem] tracking-[0.3em] text-white/80 px-2 py-1">
                   КАДР {String(i + 1).padStart(2, '0')} / {String(LOOKS.length).padStart(2, '0')}
                 </figcaption>
               </figure>

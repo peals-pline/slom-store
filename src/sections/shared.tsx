@@ -23,7 +23,7 @@ export function Barcode({ className = '', label }: { className?: string; label?:
     <div className={className}>
       <div className="barcode h-10 w-full" />
       {label && (
-        <div className="mt-1 text-[10px] font-mono tracking-[0.3em] text-center">{label}</div>
+        <div className="mt-1 text-[0.625rem] font-mono tracking-[0.3em] text-center">{label}</div>
       )}
     </div>
   );
@@ -61,7 +61,7 @@ export function ArrowLink({ children, href = '#', light = false }: { children: R
   return (
     <a
       href={href}
-      className={`group inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] uppercase underline underline-offset-4 decoration-1 ${
+      className={`group inline-flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.25em] uppercase underline underline-offset-4 decoration-1 ${
         light ? 'text-white' : 'text-slom-ink'
       }`}
     >

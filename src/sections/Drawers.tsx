@@ -57,7 +57,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
         }`}
       />
       <aside
-        className={`fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white text-slom-ink z-[80] flex flex-col border-l-2 border-slom-ink transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-[26.25rem] bg-white text-slom-ink z-[80] flex flex-col border-l-2 border-slom-ink transition-transform duration-300 ease-out ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
         role="dialog"
@@ -81,7 +81,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
                 <br />
                 Это тоже заявление.
               </p>
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slom-smoke">
+              <p className="font-mono text-[0.625rem] tracking-[0.25em] uppercase text-slom-smoke">
                 Но лучшее заявление — дроп 02
               </p>
               <a
@@ -108,7 +108,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
                       ✕
                     </button>
                   </div>
-                  <p className="font-mono text-[9px] tracking-[0.25em] text-slom-smoke mt-0.5">{it.product.nameEn}</p>
+                  <p className="font-mono text-[0.5625rem] tracking-[0.25em] text-slom-smoke mt-0.5">{it.product.nameEn}</p>
                   <div className="mt-3 flex items-center justify-between">
                     <div className="flex items-center border border-slom-ink">
                       <button onClick={() => onChangeQty(it.id, -1)} aria-label="Меньше" className="w-8 h-8 hover:bg-slom-ink hover:text-white transition-colors">−</button>
@@ -129,7 +129,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
               <span>Итого</span>
               <span className="text-base font-medium">{formatPrice(total)}</span>
             </div>
-            <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-slom-smoke">
+            <p className="font-mono text-[0.5625rem] tracking-[0.2em] uppercase text-slom-smoke">
               Доставка рассчитывается при оформлении
             </p>
             <button
@@ -148,7 +148,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
               <br />
               Заказа не будет.
             </p>
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slom-smoke">
+            <p className="font-mono text-[0.625rem] tracking-[0.25em] uppercase text-slom-smoke">
               СЛОМ — вымышленный бренд. Витрина, а не магазин: ничего не продаётся и не оформляется
             </p>
             <button
@@ -209,7 +209,7 @@ export function MenuDrawer({ open, onClose }: MenuDrawerProps) {
           </a>
         ))}
       </nav>
-      <div className="px-8 pb-10 flex items-end justify-between gap-6 font-mono text-[10px] tracking-[0.3em] uppercase text-white/80">
+      <div className="px-8 pb-10 flex items-end justify-between gap-6 font-mono text-[0.625rem] tracking-[0.3em] uppercase text-white/80">
         <span>
           EST. 2026 — Москва
           <br />

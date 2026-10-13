@@ -4,7 +4,7 @@ export default function Manifesto() {
   return (
     <section id="manifesto" className="relative">
       <div className="bg-slom-red torn-top text-slom-ink -mt-1 relative z-10">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 px-4 md:px-8 pt-20 pb-14 gap-10">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 px-4 md:px-8 pt-20 pb-14 gap-10">
           {/* Левая колонка — крик */}
           <div className="lg:col-span-3">
             <h2 className="font-display font-bold uppercase leading-[0.96] text-6xl lg:text-[4.2vw]">
@@ -17,7 +17,7 @@ export default function Manifesto() {
 
           {/* Средняя колонка — текст манифеста + плакат */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="font-mono text-xs lg:text-[13px] tracking-[0.12em] uppercase leading-loose space-y-4 text-slom-ink">
+            <div className="font-mono text-xs lg:text-[0.8125rem] tracking-[0.12em] uppercase leading-loose space-y-4 text-slom-ink">
               <p>СЛОМ не был создан, чтобы вписываться.</p>
               <p>Он был создан, чтобы ставить под вопрос всё.</p>
               <p>
@@ -44,7 +44,7 @@ export default function Manifesto() {
                 <blockquote key={r.author}>
                   <div className="text-slom-ink text-sm tracking-[0.3em]">{'★'.repeat(r.stars)}</div>
                   <p className="mt-2 text-sm leading-snug max-w-xs">{r.text}</p>
-                  <footer className="mt-1 font-mono text-[10px] tracking-[0.2em] text-slom-ink/80">
+                  <footer className="mt-1 font-mono text-[0.625rem] tracking-[0.2em] text-slom-ink/80">
                     — {r.author}
                   </footer>
                 </blockquote>

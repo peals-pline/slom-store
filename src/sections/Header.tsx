@@ -33,7 +33,7 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
     <>
       {/* Анонс-полоса — уезжает при прокрутке, шапка не закрывает эту высоту */}
       <div className="bg-slom-bone border-b border-slom-ink/15 relative z-[60]">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-8 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-slom-ink">
+        <div className="w-full px-4 md:px-8 h-8 flex items-center justify-between font-mono text-[0.625rem] tracking-[0.2em] uppercase text-slom-ink">
           <span className="hidden sm:block">Доставка по всему миру</span>
           <span className="text-slom-red">Дроп 02 // 01.08.2026</span>
           <span className="hidden sm:block">Бесплатно от 15 000 ₽</span>
@@ -45,7 +45,7 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
           вплотную к чёрному герою, и любая просветка выдаёт себя серой
           полосой поперёк макета. */}
       <header className="sticky top-0 z-40 text-white bg-slom-ink">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-white/20">
+        <div className="w-full px-4 md:px-8 h-16 flex items-center justify-between border-b border-white/20">
           <div className="flex items-center gap-8">
             <button
               onClick={onMenuOpen}
@@ -61,7 +61,7 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
             </a>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8 font-mono text-[11px] tracking-[0.3em]">
+          <nav className="hidden lg:flex items-center gap-8 font-mono text-[0.6875rem] tracking-[0.3em]">
             {NAV_LINKS.map((l) => {
               const isActive = active === l.href.slice(1);
               return (
@@ -79,7 +79,7 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
             })}
           </nav>
 
-          <div className="flex items-center gap-6 font-mono text-[11px] tracking-[0.3em] pr-3 md:pr-4">
+          <div className="flex items-center gap-6 font-mono text-[0.6875rem] tracking-[0.3em] pr-3 md:pr-4">
             <button
               onClick={onCartOpen}
               aria-label={`Открыть корзину, товаров: ${cartCount}`}
