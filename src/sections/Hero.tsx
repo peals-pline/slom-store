@@ -5,17 +5,18 @@ export default function Hero() {
     <section id="top" className="relative bg-slom-ink text-white overflow-hidden">
       <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[92vh]">
         {/* Левая часть — типографика */}
-        <div className="lg:col-span-7 relative flex flex-col justify-center px-4 md:px-8 pt-36 pb-16 lg:py-40 z-10">
+        <div className="lg:col-span-7 relative flex flex-col justify-center px-4 md:px-8 pt-28 pb-16 lg:py-40 z-10">
           <div className="relative">
-            <h1 className="font-display font-bold uppercase leading-[0.85] text-[24vw] lg:text-[11.5vw]">
+            <h1 className="font-display font-bold uppercase leading-[0.96] text-[24vw] lg:text-[11.5vw]">
               <span className="block display-condensed">Ломай</span>
               <span className="block display-condensed">Норму</span>
             </h1>
             {/* Знак поверх заголовка */}
-            <CrackedCircle className="absolute -top-6 right-[8%] lg:right-[12%] w-[13vw] lg:w-[7vw] h-auto rotate-12" />
+            <CrackedCircle className="absolute -top-[15vw] right-[6%] lg:-top-6 lg:right-[12%] w-[13vw] lg:w-[7vw] h-auto rotate-12" />
 
-            {/* Стикеры */}
-            <div className="absolute -bottom-8 right-0 hidden md:flex items-end gap-4">
+            {/* Стикеры — только на широких экранах: на планшете и узком ноутбуке
+                они ложились прямо на слово «НОРМУ» */}
+            <div className="absolute -bottom-8 right-0 hidden xl:flex items-end gap-4">
               <div className="bg-white text-slom-ink border-2 border-slom-ink w-32 rotate-[-4deg] shadow-[6px_6px_0_#FF0000]">
                 <div className="bg-slom-ink text-white font-mono text-[9px] tracking-[0.25em] text-center py-1">
                   ВНИМАНИЕ
@@ -61,6 +62,9 @@ export default function Hero() {
           <img
             src="/img/hero.webp"
             alt="Худи «Система сломана» — вид со спины"
+            width={1024}
+            height={1452}
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover object-top grayscale-[35%] contrast-125"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slom-ink via-transparent to-transparent hidden lg:block" />
@@ -71,7 +75,8 @@ export default function Hero() {
         </div>
 
         {/* Красная вертикальная рейка */}
-        <div className="hidden lg:flex lg:col-span-1 bg-slom-red flex-col justify-between items-stretch py-8 px-3">
+        {/* Узкая колонка: на 1024–1440 шрифт и трекинг меньше, чтобы «КОНФОРМИЗМА» не рвалось посреди слова */}
+        <div className="hidden lg:flex lg:col-span-1 bg-slom-red flex-col justify-between items-stretch py-8 px-2 min-[1440px]:px-3">
           <div className="space-y-3">
             <span className="font-mono text-[10px] tracking-[0.3em] text-white underline underline-offset-4 block text-center">
               +
@@ -82,7 +87,7 @@ export default function Hero() {
               className="w-full aspect-square object-cover grayscale contrast-125 border border-white/40"
               loading="lazy"
             />
-            <p className="font-mono text-[10px] tracking-[0.2em] text-white leading-relaxed uppercase">
+            <p className="font-mono text-[8px] xl:text-[9px] tracking-normal xl:tracking-[0.06em] min-[1440px]:text-[10px] min-[1440px]:tracking-[0.2em] text-white leading-relaxed uppercase break-words">
               Отрекись от конформизма. Прими хаос.
             </p>
           </div>

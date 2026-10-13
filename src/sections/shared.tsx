@@ -30,9 +30,11 @@ export function Barcode({ className = '', label }: { className?: string; label?:
 }
 
 // Вращающийся круговой штамп
+// Позиционирование задаёт вызывающий код (обычно absolute): своего `relative`
+// у обёртки нет, иначе он перебивает переданный `absolute`.
 export function CircleStamp({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={className} aria-hidden>
       <svg viewBox="0 0 200 200" className="w-full h-full spin-slow">
         <defs>
           <path id="stamp-circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />

@@ -50,7 +50,7 @@ export default function Footer() {
       {/* Гигантский призыв + рассылка */}
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
         <div className="lg:col-span-8">
-          <h2 className="font-display font-bold uppercase leading-[0.88] text-[13vw] lg:text-[7.5vw]">
+          <h2 className="font-display font-bold uppercase leading-[0.96] text-[13vw] lg:text-[7.5vw]">
             <span className="block display-condensed">Стань частью</span>
             <span className="block display-condensed text-slom-red">слома</span>
           </h2>
@@ -113,7 +113,7 @@ export default function Footer() {
               className="hover:text-slom-red transition-colors"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-                <path d="M21 4L3 11l6 2 2 7 4-5 6 2-0-13z" />
+                <path d="M21.5 3.5L2.5 11l6.5 2.5L18 7l-7 8 .5 5.5 3-3.5 4.5 3.5z" strokeLinejoin="round" />
               </svg>
             </a>
           </div>

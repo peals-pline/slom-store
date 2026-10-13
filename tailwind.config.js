@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // src/components/ui — неиспользуемые заготовки shadcn: не сканируем их, чтобы
+  // в CSS не попадали сотни лишних классов (файлы оставлены как есть).
+  content: ['./index.html', './src/*.{ts,tsx}', './src/{pages,sections,lib}/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -9,7 +11,8 @@ module.exports = {
           red: "#FF0000",
           ink: "#0A0A0A",
           bone: "#F3F3F3",
-          smoke: "#8A8A8A",
+          // Серый для мелких подписей: #8A8A8A не проходил контраст 4.5:1 на белом
+          smoke: "#6B6B6B",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
