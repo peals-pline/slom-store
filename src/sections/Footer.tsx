@@ -34,23 +34,23 @@ export default function Footer() {
     <footer id="contact" className="bg-slom-ink text-white">
       {/* Сервисная полоса */}
       <div className="border-b border-white/15">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 sm:grid-cols-3">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3">
           {SERVICES.map((s, i) => (
             <div
               key={s.label}
               className={`flex items-center gap-4 px-4 md:px-8 py-5 ${i > 0 ? 'border-t sm:border-t-0 sm:border-l border-white/15' : ''}`}
             >
               <span className="text-slom-red">{s.icon}</span>
-              <span className="font-mono text-[10px] tracking-[0.3em] uppercase">{s.label}</span>
+              <span className="font-mono text-[0.625rem] tracking-[0.3em] uppercase">{s.label}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Гигантский призыв + рассылка */}
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+      <div className="w-full px-4 md:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
         <div className="lg:col-span-8">
-          <h2 className="font-display font-bold uppercase leading-[0.88] text-[13vw] lg:text-[7.5vw]">
+          <h2 className="font-display font-bold uppercase leading-[0.96] text-[13vw] lg:text-[7.5vw]">
             <span className="block display-condensed">Стань частью</span>
             <span className="block display-condensed text-slom-red">слома</span>
           </h2>
@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
 
         <div className="lg:col-span-4 space-y-4">
-          <p className="font-mono text-[11px] tracking-[0.25em] uppercase leading-relaxed text-white/70">
+          <p className="font-mono text-[0.6875rem] tracking-[0.25em] uppercase leading-relaxed text-white/70">
             Вступи во внутренний круг.
             <br />
             Закрытые дропы.
@@ -74,7 +74,7 @@ export default function Footer() {
             href="https://t.me/pline13"
             target="_blank"
             rel="noopener noreferrer"
-            className="block border border-slom-red text-slom-red font-mono text-[11px] tracking-[0.25em] uppercase px-4 py-4 hover:bg-slom-red hover:text-white transition-colors"
+            className="block border border-slom-red text-slom-red font-mono text-[0.6875rem] tracking-[0.25em] uppercase px-4 py-4 hover:bg-slom-red hover:text-white transition-colors"
           >
             Дропы объявляются в Telegram →
           </a>
@@ -84,7 +84,7 @@ export default function Footer() {
 
       {/* Нижняя полоса */}
       <div className="border-t border-white/15">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[9px] tracking-[0.25em] uppercase text-white/50">
+        <div className="w-full px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[0.5625rem] tracking-[0.25em] uppercase text-white/50">
           <div className="flex flex-col items-center md:items-start gap-1.5">
             <span>© СЛОМ 2026</span>
             <span>Концепт-проект. Вымышленный бренд.</span>
@@ -113,7 +113,7 @@ export default function Footer() {
               className="hover:text-slom-red transition-colors"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-                <path d="M21 4L3 11l6 2 2 7 4-5 6 2-0-13z" />
+                <path d="M21.5 3.5L2.5 11l6.5 2.5L18 7l-7 8 .5 5.5 3-3.5 4.5 3.5z" strokeLinejoin="round" />
               </svg>
             </a>
           </div>

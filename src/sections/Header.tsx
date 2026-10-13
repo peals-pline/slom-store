@@ -1,4 +1,25 @@
+import { useEffect, useState } from 'react';
 import { NAV_LINKS } from '../data';
+
+/* Какая секция сейчас посередине экрана — её пункт в меню подсвечивается */
+function useActiveSection() {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    const ids = NAV_LINKS.map((l) => l.href.slice(1));
+    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+  return active;
+}
 
 interface HeaderProps {
   cartCount: number;
@@ -7,11 +28,12 @@ interface HeaderProps {
 }
 
 export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProps) {
+  const active = useActiveSection();
   return (
     <>
       {/* Анонс-полоса — уезжает при прокрутке, шапка не закрывает эту высоту */}
       <div className="bg-slom-bone border-b border-slom-ink/15 relative z-[60]">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-8 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-slom-ink">
+        <div className="w-full px-4 md:px-8 h-8 flex items-center justify-between font-mono text-[0.625rem] tracking-[0.2em] uppercase text-slom-ink">
           <span className="hidden sm:block">Доставка по всему миру</span>
           <span className="text-slom-red">Дроп 02 // 01.08.2026</span>
           <span className="hidden sm:block">Бесплатно от 15 000 ₽</span>
@@ -23,7 +45,7 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
           вплотную к чёрному герою, и любая просветка выдаёт себя серой
           полосой поперёк макета. */}
       <header className="sticky top-0 z-40 text-white bg-slom-ink">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-white/20">
+        <div className="w-full px-4 md:px-8 h-16 flex items-center justify-between border-b border-white/20">
           <div className="flex items-center gap-8">
             <button
               onClick={onMenuOpen}
@@ -39,17 +61,31 @@ export default function Header({ cartCount, onCartOpen, onMenuOpen }: HeaderProp
             </a>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8 font-mono text-[11px] tracking-[0.3em]">
-            {NAV_LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-slom-red transition-colors duration-200">
-                {l.label}
-              </a>
-            ))}
+          <nav className="hidden lg:flex items-center gap-8 font-mono text-[0.6875rem] tracking-[0.3em]">
+            {NAV_LINKS.map((l) => {
+              const isActive = active === l.href.slice(1);
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`relative py-2 hover:text-slom-red transition-colors duration-200 after:absolute after:left-0 after:right-[0.3em] after:-bottom-0.5 after:h-[2px] after:bg-slom-red after:origin-left after:transition-transform after:duration-300 ${
+                    isActive ? 'after:scale-x-100' : 'after:scale-x-0'
+                  }`}
+                >
+                  {l.label}
+                </a>
+              );
+            })}
           </nav>
 
-          <div className="flex items-center gap-6 font-mono text-[11px] tracking-[0.3em] pr-3 md:pr-4">
-            <button onClick={onCartOpen} className="hover:opacity-70 transition-opacity">
-              КОРЗИНА ({cartCount})
+          <div className="flex items-center gap-6 font-mono text-[0.6875rem] tracking-[0.3em] pr-3 md:pr-4">
+            <button
+              onClick={onCartOpen}
+              aria-label={`Открыть корзину, товаров: ${cartCount}`}
+              className="hover:opacity-70 transition-opacity"
+            >
+              КОРЗИНА <span className={cartCount > 0 ? 'text-slom-red' : undefined}>({cartCount})</span>
             </button>
           </div>
         </div>

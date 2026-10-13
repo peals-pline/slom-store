@@ -23,16 +23,18 @@ export function Barcode({ className = '', label }: { className?: string; label?:
     <div className={className}>
       <div className="barcode h-10 w-full" />
       {label && (
-        <div className="mt-1 text-[10px] font-mono tracking-[0.3em] text-center">{label}</div>
+        <div className="mt-1 text-[0.625rem] font-mono tracking-[0.3em] text-center">{label}</div>
       )}
     </div>
   );
 }
 
 // Вращающийся круговой штамп
+// Позиционирование задаёт вызывающий код (обычно absolute): своего `relative`
+// у обёртки нет, иначе он перебивает переданный `absolute`.
 export function CircleStamp({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={className} aria-hidden>
       <svg viewBox="0 0 200 200" className="w-full h-full spin-slow">
         <defs>
           <path id="stamp-circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
@@ -59,7 +61,7 @@ export function ArrowLink({ children, href = '#', light = false }: { children: R
   return (
     <a
       href={href}
-      className={`group inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] uppercase underline underline-offset-4 decoration-1 ${
+      className={`group inline-flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.25em] uppercase underline underline-offset-4 decoration-1 ${
         light ? 'text-white' : 'text-slom-ink'
       }`}
     >

@@ -1,6 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { PRODUCTS, formatPrice, NAV_LINKS } from '../data';
 import type { CartItem } from '../data';
+
+/* Общее поведение выезжающих панелей: Esc закрывает,
+   страница под открытой панелью не прокручивается. */
+function useDrawer(open: boolean, onClose: () => void) {
+  const closeRef = useRef(onClose);
+  useEffect(() => {
+    closeRef.current = onClose;
+  });
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeRef.current();
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+}
 
 /* ===== Корзина — выезжает справа ===== */
 interface CartDrawerProps {
@@ -14,6 +36,13 @@ interface CartDrawerProps {
 
 export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClear }: CartDrawerProps) {
   const [ordered, setOrdered] = useState(false);
+  // Экран «Это концепт» — одноразовый: если корзину закрыли крестиком,
+  // при следующем открытии снова видны товары и кнопка оформления.
+  const close = () => {
+    setOrdered(false);
+    onClose();
+  };
+  useDrawer(open, close);
   const detailed = items
     .map((it) => ({ ...it, product: PRODUCTS.find((p) => p.id === it.id)! }))
     .filter((it) => it.product);
@@ -22,20 +51,24 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
   return (
     <>
       <div
-        onClick={onClose}
+        onClick={close}
         className={`fixed inset-0 bg-slom-ink/60 z-[70] transition-opacity duration-300 ${
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
       <aside
-        className={`fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white text-slom-ink z-[80] flex flex-col border-l-2 border-slom-ink transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-[26.25rem] bg-white text-slom-ink z-[80] flex flex-col border-l-2 border-slom-ink transition-transform duration-300 ease-out ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Корзина"
         aria-hidden={!open}
+        inert={!open}
       >
         <div className="flex items-center justify-between px-6 h-16 border-b border-slom-ink">
           <h2 className="font-display font-bold uppercase text-xl">Корзина</h2>
-          <button onClick={onClose} className="text-2xl leading-none hover:text-slom-red transition-colors" aria-label="Закрыть">
+          <button onClick={close} className="text-2xl leading-none hover:text-slom-red transition-colors" aria-label="Закрыть">
             ✕
           </button>
         </div>
@@ -48,15 +81,16 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
                 <br />
                 Это тоже заявление.
               </p>
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slom-smoke">
+              <p className="font-mono text-[0.625rem] tracking-[0.25em] uppercase text-slom-smoke">
                 Но лучшее заявление — дроп 02
               </p>
-              <button
-                onClick={onClose}
+              <a
+                href="#shop"
+                onClick={close}
                 className="mt-2 bg-slom-red text-white font-display font-semibold uppercase tracking-[0.15em] text-sm px-8 py-4 hover:bg-slom-ink transition-colors"
               >
                 К товарам →
-              </button>
+              </a>
             </div>
           ) : (
             detailed.map((it) => (
@@ -70,16 +104,16 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
                 <div className="flex-1">
                   <div className="flex justify-between gap-2">
                     <h3 className="font-display font-semibold uppercase text-sm leading-tight">{it.product.name}</h3>
-                    <button onClick={() => onRemove(it.id)} className="text-slom-smoke hover:text-slom-red transition-colors" aria-label="Убрать">
+                    <button onClick={() => onRemove(it.id)} className="text-slom-smoke hover:text-slom-red transition-colors" aria-label={`Убрать ${it.product.name}`}>
                       ✕
                     </button>
                   </div>
-                  <p className="font-mono text-[9px] tracking-[0.25em] text-slom-smoke mt-0.5">{it.product.nameEn}</p>
+                  <p className="font-mono text-[0.5625rem] tracking-[0.25em] text-slom-smoke mt-0.5">{it.product.nameEn}</p>
                   <div className="mt-3 flex items-center justify-between">
                     <div className="flex items-center border border-slom-ink">
-                      <button onClick={() => onChangeQty(it.id, -1)} className="w-8 h-8 hover:bg-slom-ink hover:text-white transition-colors">−</button>
-                      <span className="w-8 text-center font-mono text-sm">{it.qty}</span>
-                      <button onClick={() => onChangeQty(it.id, 1)} className="w-8 h-8 hover:bg-slom-ink hover:text-white transition-colors">+</button>
+                      <button onClick={() => onChangeQty(it.id, -1)} aria-label="Меньше" className="w-8 h-8 hover:bg-slom-ink hover:text-white transition-colors">−</button>
+                      <span className="w-8 text-center font-mono text-sm" aria-live="polite">{it.qty}</span>
+                      <button onClick={() => onChangeQty(it.id, 1)} aria-label="Больше" className="w-8 h-8 hover:bg-slom-ink hover:text-white transition-colors">+</button>
                     </div>
                     <span className="font-mono text-sm">{formatPrice(it.product.price * it.qty)}</span>
                   </div>
@@ -95,7 +129,7 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
               <span>Итого</span>
               <span className="text-base font-medium">{formatPrice(total)}</span>
             </div>
-            <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-slom-smoke">
+            <p className="font-mono text-[0.5625rem] tracking-[0.2em] uppercase text-slom-smoke">
               Доставка рассчитывается при оформлении
             </p>
             <button
@@ -114,14 +148,13 @@ export function CartDrawer({ open, items, onClose, onChangeQty, onRemove, onClea
               <br />
               Заказа не будет.
             </p>
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slom-smoke">
+            <p className="font-mono text-[0.625rem] tracking-[0.25em] uppercase text-slom-smoke">
               СЛОМ — вымышленный бренд. Витрина, а не магазин: ничего не продаётся и не оформляется
             </p>
             <button
               onClick={() => {
-                setOrdered(false);
                 onClear();
-                onClose();
+                close();
               }}
               className="w-full bg-slom-ink text-white font-display font-semibold uppercase tracking-[0.15em] text-sm py-4 hover:bg-slom-red transition-colors"
             >
@@ -141,12 +174,17 @@ interface MenuDrawerProps {
 }
 
 export function MenuDrawer({ open, onClose }: MenuDrawerProps) {
+  useDrawer(open, onClose);
   return (
     <aside
       className={`fixed inset-0 bg-slom-red text-white z-[85] flex flex-col transition-transform duration-300 ease-out ${
         open ? 'translate-x-0' : '-translate-x-full'
       }`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Меню"
       aria-hidden={!open}
+      inert={!open}
     >
       <div className="flex items-center justify-between px-6 h-16 border-b border-white/30">
         <span className="font-display font-bold text-2xl">
@@ -171,10 +209,20 @@ export function MenuDrawer({ open, onClose }: MenuDrawerProps) {
           </a>
         ))}
       </nav>
-      <div className="px-8 pb-10 font-mono text-[10px] tracking-[0.3em] uppercase text-white/70">
-        EST. 2026 — Москва
-        <br />
-        Ломай норму ✕
+      <div className="px-8 pb-10 flex items-end justify-between gap-6 font-mono text-[0.625rem] tracking-[0.3em] uppercase text-white/80">
+        <span>
+          EST. 2026 — Москва
+          <br />
+          Ломай норму ✕
+        </span>
+        <a
+          href="https://t.me/pline13"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-white/60 px-3 py-2 hover:bg-white hover:text-slom-red transition-colors"
+        >
+          Telegram →
+        </a>
       </div>
     </aside>
   );
