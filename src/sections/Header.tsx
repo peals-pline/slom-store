@@ -5,12 +5,13 @@ import { NAV_LINKS } from '../data';
 function useActiveSection() {
   const [active, setActive] = useState<string | null>(null);
   useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.href.slice(1));
+    // #top (первый экран) тоже наблюдаем: когда вернулись к нему, подсветка снимается
+    const ids = ['top', ...NAV_LINKS.map((l) => l.href.slice(1))];
     const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
+          if (e.isIntersecting) setActive(e.target.id === 'top' ? null : e.target.id);
         });
       },
       { rootMargin: '-45% 0px -50% 0px' }
